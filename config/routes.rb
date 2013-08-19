@@ -13,7 +13,13 @@ Selfstarter::Application.routes.draw do
   # ADMIN
   match '/admin',                      to: 'admin#admin_website',                   as: :admin_website
   namespace :admin do
-    resources :campaigns
+    resources :campaigns do
+      resources :updates, :module => 'campaigns', :except => ['show'] do 
+        member do
+          post 'publish'
+        end
+      end
+    end
   end
   match '/admin/campaigns/:id/copy',           to: 'admin/campaigns#copy',                  as: :admin_campaigns_copy
   match '/admin/campaigns/:id/payments',       to: 'admin/campaigns#payments',              as: :admin_campaigns_payments

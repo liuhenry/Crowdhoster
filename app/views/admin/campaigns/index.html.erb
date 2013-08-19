@@ -17,6 +17,7 @@
           <th></th>
           <th></th>
           <th></th>
+          <th></th>
         </tr>
 
       <% @campaigns.each do |campaign| %>
@@ -44,6 +45,7 @@
           <td><%= link_to 'Edit', edit_admin_campaign_path(campaign) %></td>
           <td><%= link_to 'View', campaign_home_path(campaign) %></td>
           <td><%= link_to 'Payments', admin_campaigns_payments_path(campaign) %></td>
+          <td><%= link_to 'Updates', admin_campaign_updates_path(campaign) %></td>
           <td><%= link_to 'Copy', admin_campaigns_copy_path(campaign) %></td>
         </tr>
       <% end %>

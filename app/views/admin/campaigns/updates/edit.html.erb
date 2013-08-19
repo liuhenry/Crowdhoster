@@ -1,0 +1,12 @@
+
+<div id="admin">
+  <div class="container content_box clearfix">
+
+    <%= render 'admin/header', website: '', campaigns: 'active', bank: '', :breadcrumbs => [{:name => @campaign.name, :path => edit_admin_campaign_path(@campaign)}] %>
+
+    <div id="admin_campaigns">
+      <%= render 'form' %>
+    </div>
+
+  </div>
+</div>

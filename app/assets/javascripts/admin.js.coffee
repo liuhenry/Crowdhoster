@@ -106,6 +106,24 @@ Selfstarter.admin =
             $this.find('span').html(iterator)
             iterator++
 
+  # Update form
+    $('#update_publish_date').datetimepicker({
+      timeFormat: "h:mm tt",
+      minDate: new Date()
+    });
+
+    d = $('#update_publish_date').val()
+    if(d && d.length > 0)
+      d = new Date(d)
+      h = d.getHours()
+      if(h > 12)
+        t = (h-12) + ':' + ("0" + d.getMinutes()).slice(-2) + ' pm'
+      else
+        if(h == 0)
+          h = 12
+        t = h + ':' + ("0" + d.getMinutes()).slice(-2) + ' am'
+      $('#update_publish_date').val($.datepicker.formatDate('mm/dd/yy',d) + ' ' + t)
+
   # Custom Named Functions
 
   submitWebsiteForm: (form) ->
@@ -113,6 +131,11 @@ Selfstarter.admin =
 
   submitCampaignForm: (form) ->
     $date = $('#campaign_expiration_date')
+    $date.val(new Date($date.val()).toUTCString())
+    form.submit()
+
+  submitUpdateForm: (form) ->
+    $date = $('#update_publish_date')
     $date.val(new Date($date.val()).toUTCString())
     form.submit()
 

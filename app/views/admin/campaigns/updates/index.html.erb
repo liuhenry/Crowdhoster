@@ -1,0 +1,40 @@
+<div id="admin">
+  <div class="container content_box clearfix">
+
+    <%= render 'admin/header', website: '', campaigns: 'active', bank: '', :breadcrumbs => [{:name => @campaign.name, :path => edit_admin_campaign_path(@campaign)}] %>
+
+    <div id="admin_campaigns">
+      <h4>Updates</h4>
+
+      <table class="table table-striped">
+
+        <tr>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Published?</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+
+        <% @updates.each do |update| %>
+        <tr>
+          <td><%= update.title %></td>
+          <td><%= Date.parse(update.publish_date.to_s).strftime("%m/%d/%Y") %></td>
+          <td><%= update.published_flag ? raw('<i class="icon-ok"></i>') : '' %></td>
+
+          <td><%= link_to 'Edit', edit_admin_campaign_update_path(@campaign, update) %></td>
+          <td><%= link_to 'View' %></td>
+          <td><%= link_to 'Publish', publish_admin_campaign_update_path(@campaign, update) %></td>
+        </tr>
+        <% end %>
+
+      </table>
+
+      <br />
+
+      <%= link_to 'New Update', new_admin_campaign_update_path %>
+    </div>
+
+  </div>
+</div>

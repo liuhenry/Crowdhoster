@@ -142,6 +142,45 @@ $( document ).ready(function() {
 
   });
 
+    // validate '/admin/campaigns/updates/_form'
+  $("#admin_campaign_update_form").validate({
+
+    // custom handler to call named function ""
+    submitHandler: function (form) {
+      Selfstarter.admin.submitUpdateForm(form);
+    },
+
+    // validate the previously selected element when the user clicks out
+    onfocusout: function(element) {
+      $element = $(element);
+      if($element.attr('id') != 'publish_date' || $element.hasClass('error')) {
+        $element.valid();
+      }
+    },
+
+    // hide the loading spinner when form is invalid
+    invalidHandler: function(event, validator) {
+      $(".loader").hide();
+    },
+
+    // validation rules
+    rules: {
+      "update[title]": { required: true },
+      "update[publish_date]": { required: true, date: true },
+    },
+    // validation messages
+    messages: {
+      "update[title]": {
+        required: "Updates must have titles"
+      },
+      "update[publish_date]": {
+        required: "You must select a date from the calendar",
+        date: "Strange... that doesn't look like a valid date and time"
+      },
+    }
+
+  });
+
   // validate '/admin/bank-setup'
   $("#admin_bank_form").validate({
 

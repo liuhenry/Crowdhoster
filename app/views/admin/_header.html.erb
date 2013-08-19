@@ -1,5 +1,10 @@
 <h3>
   Admin > <%= link_to @settings.site_name, root_path, :class => 'show_loader', :'data-loader' => "admin_header" %>
+  <% if !(breadcrumbs ||= nil).nil? %>
+    <% breadcrumbs.each do |breadcrumb| %>
+      > <%= link_to breadcrumb[:name], breadcrumb[:path], :class => 'show_loader', :'data-loader' => "admin_header" %>
+    <% end %>
+  <% end %>
   <span class="loader" data-loader="admin_header" style="display:none"></span>
 </h3>
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130818232921) do
+ActiveRecord::Schema.define(:version => 20130819015048) do
 
   create_table "campaigns", :force => true do |t|
     t.string   "name"
@@ -176,6 +176,7 @@ ActiveRecord::Schema.define(:version => 20130818232921) do
     t.integer  "campaign_id"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
+    t.datetime "publish_date",                      :null => false
   end
 
   add_index "updates", ["campaign_id", "slug"], :name => "index_updates_on_campaign_id_and_slug", :unique => true
