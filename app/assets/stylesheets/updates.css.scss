@@ -1,0 +1,21 @@
+#update_body {
+
+  width: 100%;
+  padding: 50px 0;
+  background-color: #E6E6E6;
+
+  .main_content {
+    width: 100%;
+    max-width: 800px;
+    padding: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #FFF;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+    border: 1px solid #aaaebf;
+    box-shadow: 0 0 0 4px rgba(58, 135, 173, 0.1);
+  }
+}

@@ -1,6 +1,6 @@
 <div id="header">
   <div class="container center">
-    <% if @settings.logo_image.file? %>
+    <% if @settings.logo_image.file? && !@compact_header %>
 
       <a href="/"><%= image_tag @settings.logo_image.url, alt: "logo" %></a>
 

@@ -14,7 +14,7 @@ Selfstarter::Application.routes.draw do
   match '/admin',                      to: 'admin#admin_website',                   as: :admin_website
   namespace :admin do
     resources :campaigns do
-      resources :updates, :module => 'campaigns', :except => ['show'] do 
+      resources :updates, :module => 'campaigns', :except => [:show] do 
         member do
           post 'publish'
         end
@@ -31,6 +31,9 @@ Selfstarter::Application.routes.draw do
   match '/:id/checkout/payment',               to: 'campaigns#checkout_payment',            as: :checkout_payment
   match '/:id/checkout/confirmation',          to: 'campaigns#checkout_confirmation',       as: :checkout_confirmation
   match '/:id',                                to: 'campaigns#home',                        as: :campaign_home
+  match "/:id/updates",                        to: "updates#index",                         as: :campaign_updates
+  match "/:id/updates/:update_id",             to: "updates#show",                          as: :campaign_update
+
 
 
   namespace :api, defaults: {format: 'json'} do

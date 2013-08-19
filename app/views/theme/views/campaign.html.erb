@@ -113,16 +113,21 @@
   <div id="campaign_body">
     <div class="container clearfix">
       <div class="main_content <%= 'narrow' if @campaign.rewards? %>">
-        <% if @campaign.include_comments %>
           <div class="tabbable <%= 'narrow' if @campaign.rewards? %>">
               <ul class="nav nav-tabs">
                 <li class="active"><a href="#tab1" data-toggle="tab">Description</a></li>
-                <li><a href="#tab2" data-toggle="tab" onclick="load_disqus()">Comments <span class="badge badge-info" id="count"></span></a></li>
+
+                <li><a href="#tab3" data-toggle="tab">Updates <span class="badge badge-info" id="update-count"><%= @update_count %></span></a></li>
+                <% if @campaign.include_comments %>
+                <li><a href="#tab2" data-toggle="tab" onclick="load_disqus()">Comments <span class="badge badge-info" id="comment-count"></span></a></li>
+                <% end %>
+
               </ul>
               <div class="tab-content">
               <div class="tab-pane fade active in" id="tab1">
                    <%= raw(@campaign.main_content) %>
                 </div>
+                <% if @campaign.include_comments %>
                 <div class="tab-pane fade in" id="tab2">
                   <div class="comment_content">
                     <div id="disqus_thread"></div>
@@ -144,12 +149,25 @@
                     </script>
                     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments.</a></noscript>
                   </div>
-              </div>
+                </div>
+                <% end %>
+
+                <div class="tab-pane fade in" id="tab3">
+                  <div class="update_content">
+                    <% if @update_count == 0 %>
+                      <p>No updates yet!</p>
+                    <% else %>
+                      <% @updates.each do |update| %>
+                        <div class="update-item">
+                          <div class="update-title"><h3><%= link_to update.title, campaign_update_path(@campaign, update) %></h3></div>
+                          <div class="update-body"><%= raw(update.body) %></div>
+                        </div>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
             </div>
           </div>
-        <% else %>
-             <%= raw(@campaign.main_content) %>
-        <% end %>
       </div>
 
       <% if @campaign.rewards? %>
@@ -237,9 +255,9 @@
     window.onload = function(){
 
       var parse = document.getElementById('parse');
-      var count = document.getElementById('count');
+      var commentCount = document.getElementById('comment-count');
 
-      count.innerHTML=parseInt(parse.innerHTML,10);
+      commentCount.innerHTML=parseInt(parse.innerHTML,10);
     };
   </script>
 <% end %>

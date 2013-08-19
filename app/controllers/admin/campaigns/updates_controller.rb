@@ -18,7 +18,6 @@ class Admin::Campaigns::UpdatesController < ApplicationController
   end
 
   def create
-    print params[:update]
     @update = @campaign.updates.new(params[:update])
 
     if !@update.valid?
@@ -31,9 +30,30 @@ class Admin::Campaigns::UpdatesController < ApplicationController
       return
     end
 
-    @campaign.save()
+    @campaign.save
 
-    redirect_to admin_campaign_updates_url(@campaign), :flash => { :notice => "Update updated!" }
+    redirect_to admin_campaign_updates_url(@campaign), :flash => { :notice => "Created!" }
+    return
+  end
+
+  def update
+    @update = @campaign.updates.find(params[:id])
+    
+    @update.assign_attributes(params[:update])
+
+    if !@update.valid?
+      message = ''
+      @update.errors.each do |key, error|
+        message = message + key.to_s.humanize + ' ' + error.to_s + ', '
+      end
+      flash.now[:error] = message[0...-2]
+      render "edit"
+      return
+    end
+
+    @update.save
+
+    redirect_to admin_campaign_updates_url(@campaign), :flash => { :notice => "Updated!" }
     return
   end
 

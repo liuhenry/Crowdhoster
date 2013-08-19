@@ -193,6 +193,17 @@
         float: left;
       }
     }
+    .update_content {
+      width: 100%;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+
+      .update-item {
+        margin-bottom: 100px;
+        border-bottom: 1px solid #edeff7;
+      }
+    }
     .main_content.narrow {
       width: 620px;
       float: left;
