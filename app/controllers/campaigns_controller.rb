@@ -8,7 +8,7 @@ class CampaignsController < ApplicationController
   # and makes it available to all routes
 
   def home
-    @updates = @campaign.updates.order("publish_date ASC").select("title, slug, body, publish_date").limit(3)
+    @updates = @campaign.updates.order("publish_date DESC").select("title, slug, body, publish_date").limit(4)
     @update_count = @campaign.updates.count()
     render 'theme/views/campaign'
   end

@@ -24,7 +24,7 @@
           <td><%= update.published_flag ? raw('<i class="icon-ok"></i>') : '' %></td>
 
           <td><%= link_to 'Edit', edit_admin_campaign_update_path(@campaign, update) %></td>
-          <td><%= link_to 'View' %></td>
+          <td><%= link_to 'View', campaign_update_path(@campaign, update) %></td>
           <td><%= link_to 'Publish', publish_admin_campaign_update_path(@campaign, update) %></td>
         </tr>
         <% end %>
