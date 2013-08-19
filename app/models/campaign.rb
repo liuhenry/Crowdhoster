@@ -2,6 +2,7 @@ class Campaign < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: :slugged
   has_many :faqs, dependent: :destroy
+  has_many :updates, dependent: :delete_all
   has_many :payments
   has_many :rewards
 

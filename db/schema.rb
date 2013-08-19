@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130812230857) do
+ActiveRecord::Schema.define(:version => 20130818232921) do
 
   create_table "campaigns", :force => true do |t|
     t.string   "name"
@@ -167,6 +167,19 @@ ActiveRecord::Schema.define(:version => 20130812230857) do
     t.string   "api_key"
     t.string   "reply_to_email",              :default => "team@crowdhoster.com", :null => false
   end
+
+  create_table "updates", :force => true do |t|
+    t.text     "title"
+    t.text     "body"
+    t.boolean  "published_flag", :default => false, :null => false
+    t.string   "slug"
+    t.integer  "campaign_id"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+  end
+
+  add_index "updates", ["campaign_id", "slug"], :name => "index_updates_on_campaign_id_and_slug", :unique => true
+  add_index "updates", ["campaign_id"], :name => "index_updates_on_campaign_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
